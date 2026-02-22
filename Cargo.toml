@@ -1,0 +1,18 @@
+[package]
+name = "askey"
+version = "0.1.0"
+authors = ["T Bltg <tf.bltg@gmail.com>"]
+license = "MIT OR Apache-2.0"
+description = "A command line tool for showing how to play piano chords"
+readme = "README.md"
+homepage = "https://github.com/t-bltg/ascii_key"
+repository = "https://github.com/t-bltg/ascii_key"
+keywords = ["cli", "ascii", "piano", "chords"]
+categories = ["command-line-utilities"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.5.60", features = ["derive"] }
+itertools = "0.14.0"
+once_cell = "1.21.3"
