@@ -1,4 +1,4 @@
-use chord::Chord;
+use crate::chord::Chord;
 use once_cell::sync::Lazy;
 use std::collections::HashMap;
 

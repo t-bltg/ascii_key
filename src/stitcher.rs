@@ -1,4 +1,4 @@
-use chord::Chord;
+use crate::chord::Chord;
 use clap::ValueEnum;
 use itertools::{join, Itertools};
 

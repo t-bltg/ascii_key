@@ -2,7 +2,7 @@ use clap::{Parser, Subcommand};
 use stitcher::NameStyle;
 
 use crate::{chords, stitcher};
-use chord::Chord;
+use crate::chord::Chord;
 use std::fs;
 
 // a CLI to show you how to play a piano chord
