@@ -1,3 +1,7 @@
+[![CI](https://github.com/t-bltg/ascii_key/actions/workflows/ci.yml/badge.svg)](
+  https://github.com/t-bltg/ascii_key/actions?query=workflow%3Aci
+)
+
 # Ascii Key
 
 A command line tool for showing how to play piano chords.
