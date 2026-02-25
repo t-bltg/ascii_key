@@ -42,6 +42,9 @@ pub static ALL_CHORDS: &'static [Chord] = &[
     Chord::new(&["Em"], "egb", "", &["E minor"]),
     Chord::new(&["F"], "fa0", "", &["F"]),
     Chord::new(&["Fm"], "fG0", "", &["F minor"]),
+    // A/C# is an A major chord with C# as the bass note and A/E is an A major chord with E as the bass note
+    Chord::new(&["A/C#"], "Cea", "", &["A over C♯"]),
+    Chord::new(&["A/E"], "ea1", "", &["A over E"]),
     // keyboard2
     Chord::new(&["F#"], "", "FAC", &["F♯", "G♭"]),
     Chord::new(&["F#7"], "", "FACe", &["F♯ 7ᵗʰ", "G♭ 7ᵗʰ"]),
