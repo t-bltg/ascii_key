@@ -5,7 +5,7 @@ use crate::{chords, stitcher};
 use chord::Chord;
 use std::fs;
 
-/// A CLI to show you how to play a guitar chord
+// a CLI to show you how to play a piano chord
 #[derive(Parser)]
 #[clap(author, version, about, long_about = None)]
 #[clap(propagate_version = true)]
@@ -33,7 +33,7 @@ pub enum Command {
 
 #[derive(Parser, Debug)]
 pub struct GetArgs {
-    /// Name of the chord
+    // name of the chord
     #[clap()]
     name: String,
 }
@@ -81,27 +81,27 @@ impl AllArgs {
 
 #[derive(Parser, Debug)]
 pub struct ListArgs {
-    /// Names of the chords
+    // names of the chords
     #[clap()]
     names: Vec<String>,
 
-    /// In the output, which name to include
+    // in the output, which name to include
     #[clap(value_enum, long="style", default_value_t=NameStyle::ShortNames)]
     name_style: NameStyle,
 
-    /// In the output, how many spaces for padding between chords
+    // in the output, how many spaces for padding between chords
     #[clap(short, long, default_value_t = 4)]
     padding: u8,
 }
 
 impl ListArgs {
     fn run(self) {
-        // We would like to keep the order that 'names' are passed in
+        // we would like to keep the order that 'names' are passed in
         let chords: Vec<Chord<'static>> = self
             .names
             .iter()
             .map(|name| -> Vec<Chord<'static>> {
-                // Find the ones that matches the chord name
+                // find the ones that matches the chord name
                 match chords::ALL_CHORDS_BY_SHORT_NAMES.get(&name.to_ascii_lowercase()) {
                     Some::<&Vec<&'static Chord<'static>>>(matched_chords) => matched_chords
                         .into_iter()

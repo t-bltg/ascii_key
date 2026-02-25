@@ -2,21 +2,24 @@ use itertools::join;
 
 // cdefgab
 pub const KEYBOARD1: &str = "\
-┌─┬─┬┬─┬─┬─┬─┬┬─┬┬─┬─┐
-│ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │
-└──┴──┴──┴──┴──┴──┴──┘";
+┌─┬─┬┬─┬─┬─┬─┬┬─┬┬─┬─┬─┬─┬┬─┬─┐
+│ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │
+└──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘";
 
 // fgabcde
 pub const KEYBOARD2: &str = "\
-┌─┬─┬┬─┬┬─┬─┬─┬─┬┬─┬─┐
-│ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │
-└──┴──┴──┴──┴──┴──┴──┘";
+┌─┬─┬┬─┬┬─┬─┬─┬─┬┬─┬─┬─┬─┬┬─┬┬─┬─┐
+│ └┬┘└┬┘└┬┘ │ └┬┘└┬┘ │ └┬┘└┬┘└┬┘ │
+└──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┘";
 
 #[derive(Debug, Clone)]
 pub struct Chord<'a> {
     pub short_names: &'a [&'a str],
-    // cdefgab and CDEFGAB ≡ c♯d♯e♯f♯g♯a♯b♯
+    // cdefgab and CDFGA ≡ c♯d♯f♯g♯a♯ AND
+    // 01234 for the last notes (cc♯dd♯e)
     pub pattern1: &'a str,
+    // fgabcde and FGACD ≡ f♯g♯a♯c♯d♯ AND
+    // 0123456 for the last notes (ff♯gg♯ee♯d)
     pub pattern2: &'a str,
     pub names: &'a [&'a str],
 }
@@ -37,11 +40,9 @@ impl<'a> Chord<'a> {
     }
 
     pub fn both_names(&self) -> String {
-        format!(
-            "{} ({})",
-            join(self.names, " | "),
-            join(self.short_names, " | ")
-        )
+        format!("{} ({})",
+                join(self.names, "|"),
+                join(self.short_names, "|"))
     }
 
     pub fn keyboard1(&self) -> String {
@@ -54,6 +55,7 @@ impl<'a> Chord<'a> {
 
         for ch in self.pattern1.chars() {
             let idx: usize = match ch {
+                // notes
                 'c' => 2 * width + 1,
                 'd' => 2 * width + 4,
                 'e' => 2 * width + 7,
@@ -66,7 +68,13 @@ impl<'a> Chord<'a> {
                 'F' => 12,
                 'G' => 15,
                 'A' => 18,
-                _ => 0,
+                // switch to position
+                '0' => 2 * width + 22,
+                '1' => 24,
+                '2' => 2 * width + 25,
+                '3' => 27,
+                '4' => 2 * width + 28,
+                _ => panic!(),
             };
             board[idx] = '●';
         }
@@ -84,6 +92,7 @@ impl<'a> Chord<'a> {
 
         for ch in self.pattern2.chars() {
             let idx: usize = match ch {
+                // notes
                 'f' => 2 * width + 1,
                 'g' => 2 * width + 4,
                 'a' => 2 * width + 7,
@@ -96,7 +105,15 @@ impl<'a> Chord<'a> {
                 'A' => 9,
                 'C' => 15,
                 'D' => 18,
-                _ => 0,  // panic!()
+                // switch to position
+                '0' => 2 * width + 22,
+                '1' => 24,
+                '2' => 2 * width + 25,
+                '3' => 27,
+                '4' => 2 * width + 28,
+                '5' => 30,
+                '6' => 2 * width + 31,
+                _ => panic!(),
             };
             board[idx] = '●';
         }
